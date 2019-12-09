@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: global-loadbalancer
+  annotations:
+#    kubernetes.io/ingress.global-static-ip-name:  ''
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: app.yourdomain.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: demo-app
+          servicePort: 80
+  - host: api.yourdomain.com
+    http:
+      paths:
+      - backend:
+          serviceName: app-v1
+          servicePort: 80
+        path: /v1
+      - backend:
+          serviceName: app-v2
+          servicePort: 80
+        path: /v2
+

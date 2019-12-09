@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo-app
+  namespace: production
+  labels:
+    chart: demo-app
+    env: dev
+    app: demo-app
+    version: v1
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  revisionHistoryLimit: 4
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        env: dev
+        version: v1
+    spec:
+      containers:
+        - name: demo-app
+          image: "asia.gcr.io/<ID>/<IMAGE_NAME>"
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: "0.5"
+            limits:
+              memory: 512Mi
+              cpu: 1
+          imagePullPolicy: Always
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            volumeMounts:
+              - name: config-volume
+                mountPath: /app/config.json
+            envFrom:
+            - configMapRef:
+                name: common-configmap
+            - secretRef:
+                name: app-config
+          ports:
+            - containerPort: 8080
+      volumes:
+      - name: config-volume
+        configMap:
+          name: app-file-config

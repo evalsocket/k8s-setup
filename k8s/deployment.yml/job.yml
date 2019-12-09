@@ -1,0 +1,28 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: demo-cron-job
+  namespace: production
+spec:
+  concurrencyPolicy: Forbid
+  activeDeadlineSeconds: 1500
+  ttlSecondsAfterFinished: 150
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: esign-monit
+        spec:
+          containers:
+          - name: esign-monit
+            image: "asia.gcr.io/<ID>/<IMAGE_NAME>"
+            imagePullPolicy: Always
+            envFrom:
+            - configMapRef:
+                name: common-configmap
+            - secretRef:
+                name: app-config
+          restartPolicy: Always
+  schedule: '0,30 * * * *'
+  successfulJobsHistoryLimit: 5
