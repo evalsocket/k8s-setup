@@ -1,0 +1,43 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: google
+ namespace : production 
+spec:
+ type: ExternalName
+ externalName: api.google.in
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+ name: google
+ namespace : staging 
+spec:
+ type: ExternalName
+ externalName: api.google.in
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+ name: google
+ namespace : qa 
+spec:
+ type: ExternalName
+ externalName: api.google.in
+
+---
+
+kind: Service
+apiVersion: v1 
+metadata:
+ name: google
+ namespace : dev
+spec:
+ type: ExternalName
+ externalName: api.google.in
+
+

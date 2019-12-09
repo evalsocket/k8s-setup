@@ -1,0 +1,51 @@
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : production
+subsets:
+ - addresses:
+     - ip: 10.240.0.4
+   ports:
+     - port: 3306
+
+
+---
+
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : staging
+subsets:
+ - addresses:
+     - ip: 10.240.0.4
+   ports:
+     - port: 3306
+
+---
+
+kind: Endpoints
+apiVersion: v1
+
+metadata:
+ name: mysql
+ namespace : qa
+subsets:
+ - addresses:
+     - ip: 10.240.0.4
+   ports:
+     - port: 3306
+
+---
+
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : dev
+subsets:
+ - addresses:
+     - ip: 10.240.0.4
+   ports:
+     - port: 3306

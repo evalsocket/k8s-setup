@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+  namespace : production
+spec:
+  hard:
+    configmaps: "10"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "20"
+    secrets: "10"
+    services: "10"
+    services.loadbalancers: "2"
+
+--- 
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+  namespace : staging
+spec:
+  hard:
+    configmaps: "10"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "20"
+    secrets: "10"
+    services: "10"
+    services.loadbalancers: "2"
+
+--- 
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+  namespace : qa
+spec:
+  hard:
+    configmaps: "10"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "20"
+    secrets: "10"
+    services: "10"
+    services.loadbalancers: "2"
+
+--- 
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-counts
+  namespace : dev
+spec:
+  hard:
+    configmaps: "10"
+    persistentvolumeclaims: "4"
+    replicationcontrollers: "20"
+    secrets: "10"
+    services: "10"
+    services.loadbalancers: "2"

@@ -1,0 +1,46 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : production
+Spec:
+ type: ClusterIP
+ ports:
+ - port: 3306
+   targetPort: 3306
+
+--- 
+kind: Service
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : staging
+Spec:
+ type: ClusterIP
+ ports:
+ - port: 3306
+   targetPort: 3306
+
+--- 
+kind: Service
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : qa
+Spec:
+ type: ClusterIP
+ ports:
+ - port: 3306
+   targetPort: 3306
+
+--- 
+kind: Service
+apiVersion: v1
+metadata:
+ name: mysql
+ namespace : dev
+Spec:
+ type: ClusterIP
+ ports:
+ - port: 3306
+   targetPort: 3306
