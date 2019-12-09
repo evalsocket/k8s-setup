@@ -16,7 +16,7 @@ WORKDIR $GOPATH/src/mypackage/myapp/
 # RUN go mod download
 # RUN go mod verify
 # Build the binary
-COPY . . 
+COPY ./src . 
 RUN go get -d -v
 
 # Build the binary.
